@@ -13,6 +13,9 @@
 namespace dom
 {
 
+class ParagraphIterator;
+class ParagraphRange;
+
 class DOM_API Paragraph : public Node
 {
 public:
@@ -27,6 +30,11 @@ public:
   const std::string& text() const;
   size_t length() const;
 
+  ParagraphRange range(size_t begin, size_t end) const;
+  
+  ParagraphIterator begin() const;
+  ParagraphIterator end() const;
+
   void setText(std::string text);
 
   void addChar(char c);
@@ -38,6 +46,16 @@ public:
 
   template<typename T, typename...Args>
   void add(ParagraphRange pr, Args&& ... args);
+
+protected:
+  struct TypeDerivedFromMetaData{};
+  struct BuildGenericMetaData {};
+
+  template<typename T, typename...Args>
+  void add_meta_data(TypeDerivedFromMetaData, ParagraphRange pr, Args&& ... args);
+
+  template<typename T, typename...Args>
+  void add_meta_data(BuildGenericMetaData, ParagraphRange pr, Args&& ... args);
 
 private:
   std::string m_text;
@@ -73,10 +91,23 @@ inline const std::vector<std::shared_ptr<ParagraphMetaData>>& Paragraph::metadat
 template<typename T, typename...Args>
 inline void Paragraph::add(ParagraphRange pr, Args&& ... args)
 {
-  auto md = std::make_shared<GenericParagraphMetaData<T>>(pr, T(std::forward<Args>(args)...));
+  using Selector = typename std::conditional<std::is_base_of_v<ParagraphMetaData, T>, TypeDerivedFromMetaData, BuildGenericMetaData>::type;
+  add_meta_data<T>(Selector{}, pr, std::forward<Args>(args)...);
+}
+
+template<typename T, typename...Args>
+inline void Paragraph::add_meta_data(TypeDerivedFromMetaData, ParagraphRange pr, Args&& ... args)
+{
+  auto md = std::make_shared<T>(pr, std::forward<Args>(args)...);
   addMetaData(md);
 }
 
+template<typename T, typename...Args>
+inline void Paragraph::add_meta_data(BuildGenericMetaData, ParagraphRange pr, Args&& ... args)
+{
+  auto md = std::make_shared<GenericParagraphMetaData<T>>(pr, T(std::forward<Args>(args)...));
+  addMetaData(md);
+}
 
 } // namespace dom
 

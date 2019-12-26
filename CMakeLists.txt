@@ -51,5 +51,5 @@ target_compile_definitions(dom PUBLIC -DDOM_BUILD_LIB)
 ####### Examples & Tests
 ##################################################################
 
-#add_subdirectory(examples)
-#add_subdirectory(tests)
+add_subdirectory(examples)
+add_subdirectory(tests)

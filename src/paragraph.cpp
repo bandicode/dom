@@ -5,6 +5,7 @@
 #include "dom/paragraph.h"
 
 #include "dom/paragraph/paragraph-metadata.h"
+#include "dom/paragraph/iterator.h"
 
 #include <algorithm>
 
@@ -60,6 +61,21 @@ const ParagraphRange& ParagraphMetaData::range() const
   return m_range;
 }
 
+ParagraphRange Paragraph::range(size_t begin, size_t end) const
+{
+  return ParagraphRange{ *this, begin, end };
+}
+
+ParagraphIterator Paragraph::begin() const
+{
+  return ParagraphIterator{ *this };
+}
+
+ParagraphIterator Paragraph::end() const
+{
+  return ParagraphIterator{ *this, m_metadata.size(), m_metadata.size(), false };
+}
+
 void Paragraph::setText(std::string text)
 {
   m_metadata.clear();
@@ -83,7 +99,7 @@ void Paragraph::addMetaData(const std::shared_ptr<ParagraphMetaData>& md)
 
   auto it = std::upper_bound(m_metadata.begin(), m_metadata.end(), md, [](const PMD& lhs, const PMD& rhs) {
     return lhs->range().begin() < rhs->range().begin() ||
-      (lhs->range().begin() == rhs->range().begin() && lhs->range().end() < rhs->range().end());
+      (lhs->range().begin() == rhs->range().begin() && lhs->range().end() > rhs->range().end());
     });
 
   m_metadata.insert(it, md);

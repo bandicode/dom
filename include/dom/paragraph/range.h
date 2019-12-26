@@ -33,6 +33,16 @@ public:
   std::string text() const;
 };
 
+inline bool operator==(const ParagraphRange& lhs, const ParagraphRange& rhs)
+{
+  return lhs.begin() == rhs.begin() && rhs.end() == lhs.end();
+}
+
+inline bool operator!=(const ParagraphRange& lhs, const ParagraphRange& rhs)
+{
+  return !(lhs == rhs);
+}
+
 } // namespace dom
 
 #endif // DOM_PARAGRAPH_RANGE_H

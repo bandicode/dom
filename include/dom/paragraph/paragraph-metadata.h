@@ -7,32 +7,13 @@
 
 #include "dom/node.h"
 
+#include "dom/paragraph/range.h"
+
 #include <limits>
 #include <string>
 
 namespace dom
 {
-
-class Paragraph;
-
-class DOM_API ParagraphRange
-{
-private:
-  const Paragraph* m_par;
-  size_t m_begin;
-  size_t m_end;
-
-public:
-  ParagraphRange(const ParagraphRange&) = default;
-
-  explicit ParagraphRange(const Paragraph& p, size_t begin = 0, size_t end = std::numeric_limits<size_t>::max());
-
-  const Paragraph& paragraph() const;
-  size_t begin() const;
-  size_t end() const;
-
-  std::string text() const;
-};
 
 class DOM_API ParagraphMetaData : public Node
 {
