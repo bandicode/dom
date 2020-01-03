@@ -4,6 +4,8 @@
 
 #include "dom/document.h"
 
+#include <algorithm>
+
 namespace dom
 {
 

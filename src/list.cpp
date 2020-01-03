@@ -4,6 +4,8 @@
 
 #include "dom/list.h"
 
+#include <algorithm>
+
 namespace dom
 {
 
