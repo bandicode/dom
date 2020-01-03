@@ -8,6 +8,7 @@
 #include "dom/paragraph/paragraph-metadata.h"
 
 #include <memory>
+#include <type_traits>
 #include <vector>
 
 namespace dom

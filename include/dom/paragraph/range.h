@@ -7,6 +7,7 @@
 
 #include "dom/defs.h"
 
+#include <limits>
 #include <string>
 
 namespace dom
