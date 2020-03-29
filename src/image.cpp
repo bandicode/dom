@@ -7,11 +7,11 @@
 namespace dom
 {
 
-const std::string Image::Type = "image";
+const std::string Image::TypeId = "image";
 
 const std::string& Image::type() const
 {
-  return Type;
+  return TypeId;
 }
 
 } // namespace dom

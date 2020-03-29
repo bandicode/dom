@@ -13,25 +13,17 @@ namespace dom
 class DOM_API Image : public Node
 {
 public:
-  virtual ~Image() = default;
+  std::string src;
+  int width = -1;
+  int height = -1;
 
-  static const std::string Type;
+public:
+  ~Image() = default;
+
+  static const std::string TypeId;
   const std::string& type() const override;
 
-  explicit Image(std::string src);
-
-  const std::string& source() const;
-  int width() const;
-  int height() const;
-
-  void setSource(std::string src);
-  void setWidth(int w);
-  void setHeight(int h);
-
-private:
-  std::string m_source;
-  int m_width = -1;
-  int m_height = -1;
+  explicit Image(std::string source);
 };
 
 } // namespace dom
@@ -39,40 +31,10 @@ private:
 namespace dom
 {
 
-inline Image::Image(std::string src)
-  : m_source(std::move(src))
+inline Image::Image(std::string source)
+  : src(std::move(source))
 {
 
-}
-
-inline const std::string& Image::source() const
-{
-  return m_source;
-}
-
-inline int Image::width() const
-{
-  return m_width;
-}
-
-inline int Image::height() const
-{
-  return m_height;
-}
-
-inline void Image::setSource(std::string src)
-{
-  m_source = std::move(src);
-}
-
-inline void Image::setWidth(int w)
-{
-  m_width = w;
-}
-
-inline void Image::setHeight(int h)
-{
-  m_height = h;
 }
 
 } // namespace dom
