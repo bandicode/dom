@@ -5,12 +5,12 @@
 #ifndef DOM_IMAGE_H
 #define DOM_IMAGE_H
 
-#include "dom/node.h"
+#include "dom/element.h"
 
 namespace dom
 {
 
-class DOM_API Image : public Node
+class DOM_API Image : public Element
 {
 public:
   std::string src;

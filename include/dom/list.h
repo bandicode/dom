@@ -6,6 +6,7 @@
 #define DOM_LIST_H
 
 #include "dom/content.h"
+#include "dom/element.h"
 
 namespace dom
 {
@@ -24,7 +25,7 @@ public:
   const std::string& type() const override;
 };
 
-class DOM_API List : public Node
+class DOM_API List : public Element
 {
 public:
   std::string marker;

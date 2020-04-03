@@ -7,8 +7,20 @@
 
 #include "dom/node.h"
 
+#include <memory>
+#include <map>
+
 namespace dom
 {
+
+class DOM_API Element : public Node
+{
+public:
+  std::map<std::string, std::shared_ptr<Node>> attributes;
+
+public:
+  using Node::Node;
+};
 
 } // namespace dom
 

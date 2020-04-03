@@ -5,7 +5,7 @@
 #ifndef DOM_DOCUMENT_H
 #define DOM_DOCUMENT_H
 
-#include "dom/node.h"
+#include "dom/element.h"
 
 #include <memory>
 #include <vector>
@@ -13,7 +13,7 @@
 namespace dom
 {
 
-class DOM_API Document : public Node
+class DOM_API Document : public Element
 {
 public:
   ~Document() = default;

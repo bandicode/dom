@@ -5,6 +5,8 @@
 #ifndef DOM_PARAGRAPH_H
 #define DOM_PARAGRAPH_H
 
+#include "dom/element.h"
+
 #include "dom/paragraph/paragraph-metadata.h"
 
 #include <memory>
@@ -17,7 +19,7 @@ namespace dom
 class ParagraphIterator;
 class ParagraphRange;
 
-class DOM_API Paragraph : public Node
+class DOM_API Paragraph : public Element
 {
 public:
   Paragraph() = default;
