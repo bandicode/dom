@@ -56,6 +56,11 @@ ParagraphMetaData::ParagraphMetaData(const ParagraphRange& parrange)
 
 }
 
+ParagraphRange& ParagraphMetaData::range()
+{
+  return m_range;
+}
+
 const ParagraphRange& ParagraphMetaData::range() const
 {
   return m_range;

@@ -30,6 +30,7 @@ public:
   static const std::string TypeId;
   const std::string& type() const override;
 
+  std::string& text();
   const std::string& text() const;
   size_t length() const;
 
@@ -74,6 +75,11 @@ inline Paragraph::Paragraph(std::string text)
   : m_text(std::move(text))
 {
 
+}
+
+inline std::string& Paragraph::text()
+{
+  return m_text;
 }
 
 inline const std::string& Paragraph::text() const

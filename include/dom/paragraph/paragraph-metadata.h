@@ -24,6 +24,7 @@ protected:
   ParagraphMetaData(const ParagraphRange& parrange);
 
 public:
+  ParagraphRange& range();
   const ParagraphRange& range() const;
 
   template<typename T>
