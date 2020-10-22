@@ -35,7 +35,7 @@ file(GLOB_RECURSE DOM_HDR_FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
 )
-add_library(dom ${DOM_HDR_FILES} ${DOM_SRC_FILES})
+add_library(dom SHARED ${DOM_HDR_FILES} ${DOM_SRC_FILES})
 target_include_directories(dom PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 foreach(_source IN ITEMS ${DOM_HDR_FILES} ${DOM_SRC_FILES})
@@ -45,7 +45,7 @@ foreach(_source IN ITEMS ${DOM_HDR_FILES} ${DOM_SRC_FILES})
     source_group("${_group_path}" FILES "${_source}")
 endforeach()
 
-target_compile_definitions(dom PUBLIC -DDOM_BUILD_LIB)
+target_compile_definitions(dom PRIVATE -DDOM_BUILD_LIB)
 
 ##################################################################
 ####### Examples & Tests
