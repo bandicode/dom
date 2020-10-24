@@ -13,6 +13,11 @@ Node::Node(std::shared_ptr<Node> parent)
 
 }
 
+bool Node::isElement() const
+{
+    return false;
+}
+
 std::shared_ptr<Node> Node::parentNode() const
 {
   return m_parent.lock();

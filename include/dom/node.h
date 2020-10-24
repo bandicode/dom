@@ -35,6 +35,8 @@ public:
     return type() == T::TypeId;
   }
 
+  virtual bool isElement() const;
+
   std::shared_ptr<Node> parentNode() const;
 
   virtual const NodeList& childNodes() const;

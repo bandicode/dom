@@ -21,6 +21,8 @@ public:
 
 public:
   using Node::Node;
+
+  bool isElement() const override;
 };
 
 } // namespace dom
