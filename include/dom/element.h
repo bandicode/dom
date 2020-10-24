@@ -16,6 +16,7 @@ namespace dom
 class DOM_API Element : public Node
 {
 public:
+  std::string id;
   std::map<std::string, std::shared_ptr<Node>> attributes;
 
 public:
