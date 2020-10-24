@@ -5,7 +5,6 @@
 #ifndef DOM_LIST_H
 #define DOM_LIST_H
 
-#include "dom/content.h"
 #include "dom/element.h"
 
 namespace dom
@@ -16,13 +15,17 @@ class DOM_API ListItem : public Node
 public:
   std::string marker;
   int value = -1;
-  Content content;
+  NodeList content; // @TODO: make private
 
 public:
-  explicit ListItem(Content c = {});
+  ListItem();
 
   static const std::string TypeId;
   const std::string& type() const override;
+
+  const NodeList& childNodes() const override;
+  void appendChild(std::shared_ptr<Node> n) override;
+  void removeChild(std::shared_ptr<Node> n) override;
 };
 
 class DOM_API List : public Element
@@ -31,7 +34,7 @@ public:
   std::string marker;
   bool ordered = false;
   bool reversed = false;
-  std::vector<std::shared_ptr<ListItem>> items;
+  NodeList items; // @TODO: make private
 
 public:
   explicit List(std::string mark = {});
@@ -39,6 +42,10 @@ public:
 
   static const std::string TypeId;
   const std::string& type() const override;
+
+  const NodeList& childNodes() const override;
+  void appendChild(std::shared_ptr<Node> n) override;
+  void removeChild(std::shared_ptr<Node> n) override;
 
   void removeItem(const std::shared_ptr<ListItem>& item);
 };

@@ -39,6 +39,10 @@ public:
   void removeNode(const std::shared_ptr<Node>& n);
   void removeAt(size_t index);
 
+  const NodeList& childNodes() const override;
+  void appendChild(std::shared_ptr<Node> n) override;
+  void removeChild(std::shared_ptr<Node> n) override;
+
   void swap(size_t i, size_t j);
 
 private:

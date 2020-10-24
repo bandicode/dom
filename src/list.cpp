@@ -22,16 +22,61 @@ const std::string& List::type() const
   return TypeId;
 }
 
-ListItem::ListItem(Content c)
-  : content(std::move(c))
+ListItem::ListItem()
 {
 
+}
+
+const NodeList& ListItem::childNodes() const
+{
+  return content;
+}
+
+void ListItem::appendChild(std::shared_ptr<Node> n)
+{
+  if (!n->is<ListItem>())
+  {
+    // @TODO: throw
+    return;
+  }
+
+  removeFromParent(n);
+  append(content, n);
+  registerChild(n);
+}
+
+void ListItem::removeChild(std::shared_ptr<Node> n)
+{
+  remove(content, n);
 }
 
 List::List(std::string mark)
   : marker(mark)
 {
 
+}
+
+const NodeList& List::childNodes() const
+{
+  return items;
+}
+
+void List::appendChild(std::shared_ptr<Node> n)
+{
+  if (!n->is<ListItem>())
+  {
+    // @TODO: throw
+    return;
+  }
+
+  removeFromParent(n);
+  append(items, n);
+  registerChild(n);
+}
+
+void List::removeChild(std::shared_ptr<Node> n)
+{
+  remove(items, n);
 }
 
 void List::removeItem(const std::shared_ptr<ListItem>& item)

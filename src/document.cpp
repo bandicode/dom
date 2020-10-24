@@ -36,6 +36,23 @@ void Document::removeNode(const std::shared_ptr<Node>& n)
   }
 }
 
+const NodeList& Document::childNodes() const
+{
+  return m_nodes;
+}
+
+void Document::appendChild(std::shared_ptr<Node> n)
+{
+  removeFromParent(n);
+  append(m_nodes, n);
+  registerChild(n);
+}
+
+void Document::removeChild(std::shared_ptr<Node> n)
+{
+  remove(m_nodes, n);
+}
+
 void Document::removeAt(size_t index)
 {
   m_nodes.erase(m_nodes.begin() + index);
