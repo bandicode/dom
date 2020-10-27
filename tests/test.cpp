@@ -86,3 +86,17 @@ TEST_CASE("Paragraph iterators (nested)", "[paragraph-iterator]")
 
   REQUIRE(it == par->end());
 }
+
+TEST_CASE("Read / Write attributes", "[attributes]")
+{
+  auto elem = std::make_shared<dom::Paragraph>("I am the test case!");
+
+  elem->setAttribute("id", std::string("foo"));
+
+  auto attrs = elem->attributes();
+  REQUIRE(attrs.size() == 1);
+  REQUIRE(attrs.at(0).get<std::string>() == "foo");
+
+  elem->id = "bar";
+  REQUIRE(elem->getAttribute<std::string>("id") == "bar");
+}
