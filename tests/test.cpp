@@ -5,6 +5,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
 
+#include "dom/list.h"
 #include "dom/paragraph.h"
 #include "dom/paragraph/iterator.h"
 #include "dom/paragraph/textstyle.h"
@@ -89,14 +90,18 @@ TEST_CASE("Paragraph iterators (nested)", "[paragraph-iterator]")
 
 TEST_CASE("Read / Write attributes", "[attributes]")
 {
-  auto elem = std::make_shared<dom::Paragraph>("I am the test case!");
+  auto elem = std::make_shared<dom::List>("I am the test case!");
 
   elem->setAttribute("id", std::string("foo"));
 
   auto attrs = elem->attributes();
-  REQUIRE(attrs.size() == 1);
+  REQUIRE(attrs.size() >= 1);
   REQUIRE(attrs.at(0).get<std::string>() == "foo");
 
   elem->id = "bar";
   REQUIRE(elem->getAttribute<std::string>("id") == "bar");
+
+  elem->ordered = false;
+  elem->setAttribute("ordered", true);
+  REQUIRE(elem->getAttribute<bool>("ordered") == true);
 }

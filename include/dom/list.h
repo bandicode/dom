@@ -48,6 +48,10 @@ public:
   void removeChild(std::shared_ptr<Node> n) override;
 
   void removeItem(const std::shared_ptr<ListItem>& item);
+
+protected:
+  static GenericMetaObject<List, std::string, bool, bool> staticMetaObject;
+  MetaObject* metaObject() const override;
 };
 
 } // namespace dom

@@ -56,6 +56,19 @@ List::List(std::string mark)
 
 }
 
+GenericMetaObject<List, std::string, bool, bool> List::staticMetaObject = {
+  {
+    {"marker", &List::marker},
+    {"ordered", &List::ordered},
+    {"reversed", &List::reversed},
+  }, &Element::staticMetaObject
+};
+
+MetaObject* List::metaObject() const
+{
+  return &staticMetaObject;
+}
+
 const NodeList& List::childNodes() const
 {
   return items;
