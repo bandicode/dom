@@ -5,6 +5,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
 
+#include "dom/document.h"
 #include "dom/list.h"
 #include "dom/paragraph.h"
 #include "dom/paragraph/iterator.h"
@@ -108,4 +109,9 @@ TEST_CASE("Read / Write attributes", "[attributes]")
   elem->ordered = false;
   elem->setAttribute("ordered", true);
   REQUIRE(elem->getAttribute<bool>("ordered") == true);
+}
+
+TEST_CASE("Create a document", "[document]")
+{
+  auto doc = std::make_shared<dom::Document>();
 }

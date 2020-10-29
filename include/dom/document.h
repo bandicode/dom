@@ -13,7 +13,7 @@
 namespace dom
 {
 
-class DOM_API Document : public Element
+class DOM_API Document : public Node
 {
 public:
   ~Document() = default;
