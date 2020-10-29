@@ -10,7 +10,7 @@
 namespace dom
 {
 
-class DOM_API ListItem : public Node
+class DOM_API ListItem : public Element
 {
 public:
   std::string marker;
@@ -26,6 +26,10 @@ public:
   const NodeList& childNodes() const override;
   void appendChild(std::shared_ptr<Node> n) override;
   void removeChild(std::shared_ptr<Node> n) override;
+
+protected:
+  static GenericMetaObject<ListItem, std::string, int> staticMetaObject;
+  MetaObject* metaObject() const override;
 };
 
 class DOM_API List : public Element

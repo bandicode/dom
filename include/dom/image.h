@@ -24,6 +24,10 @@ public:
   const std::string& type() const override;
 
   explicit Image(std::string source);
+
+protected:
+  static GenericMetaObject<Image, std::string, int, int> staticMetaObject;
+  MetaObject* metaObject() const override;
 };
 
 } // namespace dom
