@@ -156,11 +156,11 @@ template<typename T, typename... Args>
 void fill_property_vec_impl(std::vector<MetaProperty*>& list, T& prop, Args&... rest)
 {
   list.push_back(&prop);
-  fill_property_vec_impl(list, std::forward<Args>(rest)...);
+  fill_property_vec_impl(list, rest...);
 }
 
 template<typename Tuple, std::size_t... Is>
-void fill_property_vec_impl(std::vector<MetaProperty*>& list, Tuple& t, std::index_sequence<Is...>)
+void fill_property_vec_impl_index_seq(std::vector<MetaProperty*>& list, Tuple& t, std::index_sequence<Is...>)
 {
   fill_property_vec_impl(list, std::get<Is>(t)...);
 }
@@ -168,7 +168,7 @@ void fill_property_vec_impl(std::vector<MetaProperty*>& list, Tuple& t, std::ind
 template<typename... Args>
 void fill_property_vec(std::vector<MetaProperty*>& list, std::tuple<Args...>& t)
 {
-  fill_property_vec_impl(list, t, std::index_sequence_for<Args...>{});
+  fill_property_vec_impl_index_seq(list, t, std::index_sequence_for<Args...>{});
 }
 
 template<typename T, typename... Args>
