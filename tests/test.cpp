@@ -95,6 +95,10 @@ TEST_CASE("Read / Write attributes", "[attributes]")
   elem->setAttribute("id", std::string("foo"));
 
   auto attrs = elem->attributes();
+
+  REQUIRE(attrs.at(0).name() == "id");
+  REQUIRE(attrs.at(0).type() == dom::AttributeType::String);
+
   REQUIRE(attrs.size() >= 1);
   REQUIRE(attrs.at(0).get<std::string>() == "foo");
 

@@ -13,6 +13,15 @@
 namespace dom
 {
 
+enum class AttributeType
+{
+  None,
+  Bool,
+  Int,
+  Double,
+  String,
+};
+
 class DOM_API MetaProperty
 {
 public: 
@@ -21,6 +30,8 @@ public:
 public:
   explicit MetaProperty(std::string name);
   virtual ~MetaProperty();
+
+  virtual AttributeType type() const = 0;
 
   virtual bool readBool(const Node& n) const = 0;
   virtual int readInt(const Node& n) const = 0;
@@ -104,6 +115,20 @@ struct GenericMetaProperty : public MetaProperty
       pointer(ptr)
   {
 
+  }
+
+  AttributeType type() const override
+  {
+    if (std::is_same<T, bool>::value)
+      return AttributeType::Bool;
+    else if (std::is_same<T, int>::value)
+      return AttributeType::Int;
+    else if (std::is_same<T, double>::value)
+      return AttributeType::Double;
+    else if (std::is_same<T, std::string>::value)
+      return AttributeType::String;
+    else
+      return AttributeType::None;
   }
 
   bool readBool(const Node& n) const override
@@ -231,6 +256,22 @@ public:
       property(prop)
   {
 
+  }
+
+  AttributeType type() const
+  {
+    if (!property)
+      return AttributeType::None;
+
+    return property->type();
+  }
+
+  std::string name() const
+  {
+    if (property)
+      return property->name;
+    else
+      return std::string();
   }
 
   template<typename T>
