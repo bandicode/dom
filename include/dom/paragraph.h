@@ -100,7 +100,7 @@ inline const std::vector<std::shared_ptr<ParagraphMetaData>>& Paragraph::metadat
 template<typename T, typename...Args>
 inline void Paragraph::add(ParagraphRange pr, Args&& ... args)
 {
-  using Selector = typename std::conditional<std::is_base_of_v<ParagraphMetaData, T>, TypeDerivedFromMetaData, BuildGenericMetaData>::type;
+  using Selector = typename std::conditional<std::is_base_of<ParagraphMetaData, T>::value, TypeDerivedFromMetaData, BuildGenericMetaData>::type;
   add_meta_data<T>(Selector{}, pr, std::forward<Args>(args)...);
 }
 

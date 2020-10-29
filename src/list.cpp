@@ -50,10 +50,36 @@ void ListItem::removeChild(std::shared_ptr<Node> n)
   remove(content, n);
 }
 
+GenericMetaObject<ListItem, std::string, int> ListItem::staticMetaObject = {
+  {
+    {"marker", &ListItem::marker},
+    {"value", &ListItem::value},
+  }, &Element::staticMetaObject
+};
+
+MetaObject* ListItem::metaObject() const
+{
+  return &staticMetaObject;
+}
+
+
 List::List(std::string mark)
   : marker(mark)
 {
 
+}
+
+GenericMetaObject<List, std::string, bool, bool> List::staticMetaObject = {
+  {
+    {"marker", &List::marker},
+    {"ordered", &List::ordered},
+    {"reversed", &List::reversed},
+  }, &Element::staticMetaObject
+};
+
+MetaObject* List::metaObject() const
+{
+  return &staticMetaObject;
 }
 
 const NodeList& List::childNodes() const

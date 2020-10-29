@@ -14,4 +14,17 @@ const std::string& Image::type() const
   return TypeId;
 }
 
+GenericMetaObject<Image, std::string, int, int> Image::staticMetaObject = {
+  {
+    {"src", &Image::src},
+    {"width", &Image::width},
+    {"height", &Image::height},
+  }, &Element::staticMetaObject
+};
+
+MetaObject* Image::metaObject() const
+{
+  return &staticMetaObject;
+}
+
 } // namespace dom
