@@ -63,4 +63,33 @@ void Document::swap(size_t i, size_t j)
   std::swap(m_nodes[i], m_nodes[j]);
 }
 
+static std::shared_ptr<Element> get_element_by_id(const std::shared_ptr<Node>& node, const std::string& id)
+{
+  if (node->isElement() && std::static_pointer_cast<Element>(node)->id == id)
+    return std::static_pointer_cast<Element>(node);
+
+  for (auto child : node->childNodes())
+  {
+    auto result = get_element_by_id(child, id);
+
+    if (result)
+      return result;
+  }
+
+  return nullptr;
+}
+
+std::shared_ptr<Element> Document::getElementById(const std::string& id) const
+{
+  for (auto child : childNodes())
+  {
+    auto result = get_element_by_id(child, id);
+
+    if (result)
+      return result;
+  }
+
+  return nullptr;
+}
+
 } // namespace dom

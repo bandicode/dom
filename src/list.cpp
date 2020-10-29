@@ -34,12 +34,6 @@ const NodeList& ListItem::childNodes() const
 
 void ListItem::appendChild(std::shared_ptr<Node> n)
 {
-  if (!n->is<ListItem>())
-  {
-    // @TODO: throw
-    return;
-  }
-
   removeFromParent(n);
   append(content, n);
   registerChild(n);
