@@ -7,9 +7,6 @@
 
 #include "dom/element.h"
 
-#include <memory>
-#include <vector>
-
 namespace dom
 {
 
