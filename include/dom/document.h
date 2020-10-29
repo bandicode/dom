@@ -51,7 +51,7 @@ private:
 namespace dom
 {
 
-Document::Document(std::string tt)
+inline Document::Document(std::string tt)
   : title(std::move(tt))
 {
 
