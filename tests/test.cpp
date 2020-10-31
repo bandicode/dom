@@ -136,4 +136,7 @@ TEST_CASE("Create a document", "[document]")
 
   elem = doc->getElementById("bar");
   REQUIRE(elem == second_par);
+
+  std::vector<std::shared_ptr<dom::Element>> result = doc->getElementsByClassName(dom::Paragraph::TypeId);
+  REQUIRE(result.size() == 2);
 }

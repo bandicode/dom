@@ -92,4 +92,23 @@ std::shared_ptr<Element> Document::getElementById(const std::string& id) const
   return nullptr;
 }
 
+static void get_elemenst_by_class_name(std::vector<std::shared_ptr<Element>>& outvec, const std::shared_ptr<Node>& node, const std::string& class_name)
+{
+  if (node->isElement() && node->className() == class_name)
+    outvec.push_back(std::static_pointer_cast<Element>(node));
+
+  for (auto child : node->childNodes())
+    get_elemenst_by_class_name(outvec, child, class_name);
+}
+
+std::vector<std::shared_ptr<Element>> Document::getElementsByClassName(const std::string& class_name) const
+{
+  std::vector<std::shared_ptr<Element>> result;
+
+  for (auto child : childNodes())
+    get_elemenst_by_class_name(result, child, class_name);
+
+  return result;
+}
+
 } // namespace dom

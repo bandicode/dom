@@ -38,6 +38,7 @@ public:
   void swap(size_t i, size_t j);
 
   std::shared_ptr<Element> getElementById(const std::string& id) const;
+  std::vector<std::shared_ptr<Element>> getElementsByClassName(const std::string& class_name) const;
 
 private:
   std::vector<std::shared_ptr<Node>> m_nodes;
