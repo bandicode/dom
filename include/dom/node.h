@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 namespace dom
@@ -32,7 +33,7 @@ public:
   template<typename T>
   bool is() const
   {
-    return className() == T::TypeId;
+    return (className() == T::TypeId) || (!std::is_final<T>::value && dynamic_cast<const T*>(this) != nullptr);
   }
 
   virtual bool isElement() const;
