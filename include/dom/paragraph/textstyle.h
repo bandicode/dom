@@ -18,7 +18,7 @@ public:
   TextStyle(const ParagraphRange& pr, std::string style);
 
   static const std::string TypeId;
-  const std::string& type() const override;
+  const std::string& className() const override;
 
   const std::string& style() const;
   void setStyle(std::string str);

@@ -21,7 +21,7 @@ public:
   ListItem();
 
   static const std::string TypeId;
-  const std::string& type() const override;
+  const std::string& className() const override;
 
   const NodeList& childNodes() const override;
   void appendChild(std::shared_ptr<Node> n) override;
@@ -45,7 +45,7 @@ public:
   ~List() = default;
 
   static const std::string TypeId;
-  const std::string& type() const override;
+  const std::string& className() const override;
 
   const NodeList& childNodes() const override;
   void appendChild(std::shared_ptr<Node> n) override;

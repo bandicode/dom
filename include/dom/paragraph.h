@@ -28,7 +28,7 @@ public:
   explicit Paragraph(std::string text);
 
   static const std::string TypeId;
-  const std::string& type() const override;
+  const std::string& className() const override;
 
   std::string& text();
   const std::string& text() const;

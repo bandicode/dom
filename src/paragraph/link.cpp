@@ -9,7 +9,7 @@ namespace dom
 
 const std::string Link::TypeId = "link";
 
-const std::string& Link::type() const
+const std::string& Link::className() const
 {
   return TypeId;
 }

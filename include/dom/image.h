@@ -21,7 +21,7 @@ public:
   ~Image() = default;
 
   static const std::string TypeId;
-  const std::string& type() const override;
+  const std::string& className() const override;
 
   explicit Image(std::string source);
 

@@ -45,7 +45,7 @@ public:
 
   }
 
-  const std::string& type() const override
+  const std::string& className() const override
   {
     return T::TypeId;
   }

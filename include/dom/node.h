@@ -27,12 +27,12 @@ public:
 
   explicit Node(std::shared_ptr<Node> parent);
 
-  virtual const std::string& type() const = 0;
+  virtual const std::string& className() const = 0;
 
   template<typename T>
   bool is() const
   {
-    return type() == T::TypeId;
+    return className() == T::TypeId;
   }
 
   virtual bool isElement() const;

@@ -27,7 +27,7 @@ public:
   Note(const ParagraphRange& pr, std::shared_ptr<Paragraph> par, Location loc = FootNote);
 
   static const std::string TypeId;
-  const std::string& type() const override;
+  const std::string& className() const override;
 
 private:
   std::shared_ptr<Paragraph> m_content;

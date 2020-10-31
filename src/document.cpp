@@ -11,7 +11,7 @@ namespace dom
 
 const std::string Document::Type = "document";
 
-const std::string& Document::type() const
+const std::string& Document::className() const
 {
   return Type;
 }
