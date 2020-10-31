@@ -9,11 +9,11 @@
 namespace dom
 {
 
-const std::string Document::Type = "document";
+const std::string Document::TypeId = "document";
 
 const std::string& Document::className() const
 {
-  return Type;
+  return TypeId;
 }
 
 void Document::addNode(std::shared_ptr<Node> n)

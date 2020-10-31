@@ -19,7 +19,7 @@ public:
 public:
   ~Document() = default;
 
-  static const std::string Type;
+  static const std::string TypeId;
   const std::string& className() const override;
 
   explicit Document(std::string title = "");
