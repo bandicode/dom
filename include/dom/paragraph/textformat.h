@@ -58,7 +58,7 @@ public:
   ParagraphFormat(const ParagraphRange& pr, const TextFormat& fmt);
 
   static const std::string TypeId;
-  const std::string& type() const override;
+  const std::string& className() const override;
 
   const TextFormat& format() const;
 };

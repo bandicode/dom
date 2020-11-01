@@ -20,7 +20,7 @@ public:
   Link(const ParagraphRange& pr, std::string url);
 
   static const std::string TypeId;
-  const std::string& type() const override;
+  const std::string& className() const override;
 
   const std::string& url() const;
   void setUrl(std::string url);

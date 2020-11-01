@@ -5,6 +5,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
 
+#include "dom/document.h"
 #include "dom/list.h"
 #include "dom/paragraph.h"
 #include "dom/paragraph/iterator.h"
@@ -108,4 +109,34 @@ TEST_CASE("Read / Write attributes", "[attributes]")
   elem->ordered = false;
   elem->setAttribute("ordered", true);
   REQUIRE(elem->getAttribute<bool>("ordered") == true);
+}
+
+TEST_CASE("Create a document", "[document]")
+{
+  auto doc = std::make_shared<dom::Document>();
+
+  auto first_par = std::make_shared<dom::Paragraph>("First paragraph.");
+  first_par->id = "foo";
+
+  doc->appendChild(first_par);
+
+  auto list = std::make_shared<dom::List>();
+ 
+  auto second_par = std::make_shared<dom::Paragraph>("Second paragraph.");
+  second_par->id = "bar";
+
+  auto list_item = std::make_shared<dom::ListItem>();
+  list_item->appendChild(second_par);
+  list->appendChild(list_item);
+
+  doc->appendChild(list);
+
+  auto elem = doc->getElementById("foo");
+  REQUIRE(elem == first_par);
+
+  elem = doc->getElementById("bar");
+  REQUIRE(elem == second_par);
+
+  std::vector<std::shared_ptr<dom::Element>> result = doc->getElementsByClassName(dom::Paragraph::TypeId);
+  REQUIRE(result.size() == 2);
 }

@@ -9,11 +9,11 @@
 namespace dom
 {
 
-const std::string Document::Type = "document";
+const std::string Document::TypeId = "document";
 
-const std::string& Document::type() const
+const std::string& Document::className() const
 {
-  return Type;
+  return TypeId;
 }
 
 void Document::addNode(std::shared_ptr<Node> n)
@@ -61,6 +61,54 @@ void Document::removeAt(size_t index)
 void Document::swap(size_t i, size_t j)
 {
   std::swap(m_nodes[i], m_nodes[j]);
+}
+
+static std::shared_ptr<Element> get_element_by_id(const std::shared_ptr<Node>& node, const std::string& id)
+{
+  if (node->isElement() && std::static_pointer_cast<Element>(node)->id == id)
+    return std::static_pointer_cast<Element>(node);
+
+  for (auto child : node->childNodes())
+  {
+    auto result = get_element_by_id(child, id);
+
+    if (result)
+      return result;
+  }
+
+  return nullptr;
+}
+
+std::shared_ptr<Element> Document::getElementById(const std::string& id) const
+{
+  for (auto child : childNodes())
+  {
+    auto result = get_element_by_id(child, id);
+
+    if (result)
+      return result;
+  }
+
+  return nullptr;
+}
+
+static void get_elemenst_by_class_name(std::vector<std::shared_ptr<Element>>& outvec, const std::shared_ptr<Node>& node, const std::string& class_name)
+{
+  if (node->isElement() && node->className() == class_name)
+    outvec.push_back(std::static_pointer_cast<Element>(node));
+
+  for (auto child : node->childNodes())
+    get_elemenst_by_class_name(outvec, child, class_name);
+}
+
+std::vector<std::shared_ptr<Element>> Document::getElementsByClassName(const std::string& class_name) const
+{
+  std::vector<std::shared_ptr<Element>> result;
+
+  for (auto child : childNodes())
+    get_elemenst_by_class_name(result, child, class_name);
+
+  return result;
 }
 
 } // namespace dom

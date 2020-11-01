@@ -14,7 +14,7 @@ namespace dom
 
 const std::string Paragraph::TypeId = "paragraph";
 
-const std::string& Paragraph::type() const
+const std::string& Paragraph::className() const
 {
   return TypeId;
 }

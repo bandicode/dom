@@ -9,7 +9,7 @@ namespace dom
 
 const std::string ParagraphFormat::TypeId = "textformat";
 
-const std::string& ParagraphFormat::type() const
+const std::string& ParagraphFormat::className() const
 {
   return TypeId;
 }

@@ -9,7 +9,7 @@ namespace dom
 
 const std::string TextStyle::TypeId = "textstyle";
 
-const std::string& TextStyle::type() const
+const std::string& TextStyle::className() const
 {
   return TypeId;
 }

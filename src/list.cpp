@@ -12,12 +12,12 @@ namespace dom
 const std::string List::TypeId = "list";
 const std::string ListItem::TypeId = "listitem";
 
-const std::string& ListItem::type() const
+const std::string& ListItem::className() const
 {
   return TypeId;
 }
 
-const std::string& List::type() const
+const std::string& List::className() const
 {
   return TypeId;
 }
@@ -34,12 +34,6 @@ const NodeList& ListItem::childNodes() const
 
 void ListItem::appendChild(std::shared_ptr<Node> n)
 {
-  if (!n->is<ListItem>())
-  {
-    // @TODO: throw
-    return;
-  }
-
   removeFromParent(n);
   append(content, n);
   registerChild(n);

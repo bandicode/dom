@@ -7,7 +7,6 @@
 
 #include "dom/node.h"
 
-#include <memory>
 #include <map>
 
 namespace dom

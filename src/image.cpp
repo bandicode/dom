@@ -9,7 +9,7 @@ namespace dom
 
 const std::string Image::TypeId = "image";
 
-const std::string& Image::type() const
+const std::string& Image::className() const
 {
   return TypeId;
 }

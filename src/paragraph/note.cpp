@@ -9,7 +9,7 @@ namespace dom
 
 const std::string Note::TypeId = "note";
 
-const std::string& Note::type() const
+const std::string& Note::className() const
 {
   return TypeId;
 }
